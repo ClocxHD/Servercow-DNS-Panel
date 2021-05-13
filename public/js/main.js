@@ -77,7 +77,7 @@ $(() => {
             modal.find("#edit_content").val(data.content);
             modal.find("#edit_ttl").val(data.ttl);
 
-            modal.addClass("is-active animate__animated animate__fadeIn");
+            modal.addClass("is-active animate__animated animate__fadeIn animate__faster");
         });
     });
 
