@@ -1,0 +1,106 @@
+@import "libs/sweetalert2.min.css";
+@import "libs/bulma-0.9.1.min.css";
+@import "libs/Chart-2.9.4.min.css";
+@import "libs/microtip.css";
+@import "libs/animate-4.1.1.min.css";
+
+#section-navbar {
+    margin-bottom: 20px;
+
+    .navbar-end {
+        .navbar-item {
+            &:last-child {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.delete-btn {
+    border: none;
+    background-color: transparent;
+    color: #fc4d4d;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.edit-btn {
+    border: none;
+    background-color: transparent;
+    color: orange;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.is-centered {
+    text-align: center;
+}
+
+#overviewTable {
+    margin-bottom: 0;
+}
+
+.btn-refresh-records {
+    margin-top: 1em;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.lang-active, .lang-active:hover {
+    background-color: #3273dc !important;
+    color: #fff !important;
+}
+
+.flag {
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: url(/img/languages.png);
+    min-width: 22px;
+    height: 16px;
+    min-height: 16px;
+    max-height: 16px;
+
+    &[lang=de] {
+        background-position: 0 -575px;
+    }
+
+    &[lang=en] {
+        background-position: 0 -607px;
+    }
+}
+
+.flag-xs {
+    min-width: 14px;
+    height: 11px;
+    min-height: 11px;
+    max-height: 11px;
+
+    &[lang=de] {
+        background-position: 0 -55px;
+    }
+
+    &[lang=en] {
+        background-position: 0 -77px;
+    }
+}
+
+#error-container {
+    .message-body {
+        ul {
+            list-style: decimal;
+        }
+    }
+}
+
+#recordEditModal {
+    .modal-content {
+        background-color: #fff;
+        padding: 50px;
+    }
+}
