@@ -6,12 +6,16 @@ use Illuminate\Support\Facades\Session;
 
 class ReturnController extends Controller
 {
-    public static function returnWithSuccess($message, $target = "", $to_route = false)
+    public static function returnWithSuccess($message, $target = "", $to_route = false, $iHashId = null)
     {
         Session::flash('Success_Message', $message);
 
         if (!empty($_POST["hash"])) {
             return redirect("/" . $_POST["hash"]);
+        }
+
+        if ($iHashId) {
+            return redirect("/" . "#domain-" . $iHashId);
         }
 
         if ($target == "") {
@@ -28,12 +32,16 @@ class ReturnController extends Controller
         }
     }
 
-    public static function returnWithError($error, $target = "", $with_input = false)
+    public static function returnWithError($error, $target = "", $with_input = false, $iHashId = null)
     {
         Session::flash('Error_Message', $error);
 
         if (!empty($_POST["hash"])) {
             return redirect("/" . $_POST["hash"]);
+        }
+
+        if ($iHashId) {
+            return redirect("/" . "#domain-" . $iHashId);
         }
 
         if ($target == "") {

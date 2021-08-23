@@ -97,8 +97,6 @@ class RecordController extends Controller
 
             $aReturn = $request->json();
 
-            dd($aReturn);
-
             if (array_key_exists("error", $aReturn)) {
                 return ReturnController::returnWithError(__("messages.error_saving_record", ["error" => $aReturn["error"]]));
             }
@@ -106,7 +104,9 @@ class RecordController extends Controller
             return ReturnController::returnWithError(__("messages.error_saving_record", ["error" => $e->getMessage()]));
         }
 
-        $this->getNewRecordsForDomain($sDomainName, $aData["domain"]);
+        if (env('FETCH_RECORDS_AFTER_CHANGE')) {
+            $this->getNewRecordsForDomain($sDomainName, $aData["domain"]);
+        }
 
         return ReturnController::returnWithSuccess(__("messages.suc_saving_record"));
     }
@@ -140,7 +140,9 @@ class RecordController extends Controller
             return ReturnController::returnWithError(__("messages.error_deleting_record", ["error" => $e->getMessage()]));
         }
 
-        $this->getNewRecordsForDomain($aData["domain_name"], $aData["domain_id"]);
+        if (env('FETCH_RECORDS_AFTER_CHANGE')) {
+            $this->getNewRecordsForDomain($aData["domain_name"], $aData["domain_id"]);
+        }
 
         return ReturnController::returnWithSuccess(__("messages.suc_deleting_record", ["record" => $aData["name"]]));
     }
@@ -176,7 +178,9 @@ class RecordController extends Controller
             return ReturnController::returnWithError(__("messages.error_editing_record", ["error" => $e->getMessage()]));
         }
 
-        $this->getNewRecordsForDomain($oRecord->domain->name, $oRecord->domain->id);
+        if (env('FETCH_RECORDS_AFTER_CHANGE')) {
+            $this->getNewRecordsForDomain($oRecord->domain->name, $oRecord->domain->id);
+        }
 
         return ReturnController::returnWithSuccess(__("messages.suc_editing_record"));
     }
@@ -186,10 +190,10 @@ class RecordController extends Controller
         try {
             $this->getNewRecordsForDomain($sDomainName, $iDomainId);
         } catch (\Exception $e) {
-            return ReturnController::returnWithError(__("messages.error_fetching_records", ["error" => $e->getMessage()]));
+            return ReturnController::returnWithError(__("messages.error_fetching_records", ["error" => $e->getMessage()]), "", false, $iDomainId);
         }
 
-        return ReturnController::returnWithSuccess(__("messages.suc_fetching_records", ["domain" => $sDomainName]));
+        return ReturnController::returnWithSuccess(__("messages.suc_fetching_records", ["domain" => $sDomainName]), "", false, $iDomainId);
     }
 
     public function getNewRecordsForDomain($sDomainName, $iDomainId)

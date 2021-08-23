@@ -6,6 +6,26 @@ $(() => {
         langName = "german";
     }
 
+    let hash = document.location.hash;
+    let prefix = "#domain-";
+    let panelPrefix = "#domain-panel-";
+    let hashID = hash.replace(prefix, "");
+
+    if (hash) {
+        $("#select_domain").val(hashID);
+        $("[id^=record-hash]").val(prefix + hashID);
+
+        $(".domain-panel").each(function () {
+            $(this).removeClass("is-active");
+            $(this).addClass("is-hidden");
+        });
+
+        $(panelPrefix + hashID).addClass("is-active");
+        $(panelPrefix + hashID).removeClass("is-hidden");
+
+        $("#form-add-record #domain").val(hashID);
+    }
+
     $("#mainBurger").on("click", function () {
         let burgerIcon = $(this);
         let menu = $("#mainNavbar");
@@ -83,6 +103,7 @@ $(() => {
 
     $("#select_domain").on("change", function () {
         let domainId = $(this).val();
+        window.location.hash = prefix + domainId;
 
         $(".domain-panel").each(function () {
             if ($(this).hasClass("domain-panel-" + domainId)) {

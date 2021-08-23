@@ -8,6 +8,7 @@
         <section class="modal-card-body">
             <form action="{{ Route("records.edit") }}" method="post">
                 <input type="hidden" name="record_id" id="edit_record_id">
+                <input type="hidden" name="hash" id="record-hash">
 
                 <div class="field">
                     <label for="edit_name">{{ __("views.name") }}</label>

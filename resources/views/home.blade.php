@@ -25,7 +25,7 @@
         <hr>
 
         @foreach($domains as $domain)
-            <nav class="panel domain-panel domain-panel-{{ $domain->id }} {{ $loop->first ? 'is-active' : 'is-hidden' }}">
+            <nav class="panel domain-panel domain-panel-{{ $domain->id }} {{ $loop->first ? 'is-active' : 'is-hidden' }}" id="domain-panel-{{ $domain->id }}">
                 <p class="panel-heading">{{ __("views.domain") }}: {{ $domain->name }}</p>
                 <!-- TODO: Check for Domain specific records -->
                 @if($records->isEmpty())
@@ -87,6 +87,7 @@
                                                 <input type="hidden" name="name" value="{{ $record->name }}">
                                                 <input type="hidden" name="domain_name" value="{{ $domain->name }}">
                                                 <input type="hidden" name="domain_id" value="{{ $domain->id }}">
+                                                <input type="hidden" name="hash" id="record-hash_{{ $domain->id }}_{{ $record->id }}">
                                                 {{ csrf_field() }}
                                                 <span class="delete-btn" aria-label="{{ __("views.delete_record") }}" data-microtip-position="top" data-name="{{ $record->name }}" data-delete="record" role="tooltip"><i class="fas fa-trash-alt"></i></span>
                                             </form>
@@ -98,6 +99,9 @@
                         </table>
                     </div>
                 @endif
+                <div class="panel-block">
+                    <a href="{{ Route("records.add") }}/#domain-{{ $domain->id }}" class="button is-dark is-small"><i class="far fa-plus-square"></i>&nbsp;{{ __("views.add_record") }}</a>
+                </div>
                 @if(!empty($update[$domain->id]))
                     <div class="panel-block">
                         <p>{{ $update[$domain->id]["text"] }}</p>

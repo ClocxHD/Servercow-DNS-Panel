@@ -3,7 +3,7 @@
 @section('title', $title)
 
 @section('content')
-    <form action="{{ Route("records.add") }}" method="post">
+    <form action="{{ Route("records.add") }}" method="post" id="form-add-record">
         <div class="field">
             <label for="domain" class="label">{{ __("views.domain") }}</label>
             <div class="control">
@@ -16,6 +16,8 @@
                 </div>
             </div>
         </div>
+
+        <input type="hidden" name="hash" id="record-hash">
 
         <div class="field">
             <label for="type" class="label">{{ __("views.type") }}</label>
