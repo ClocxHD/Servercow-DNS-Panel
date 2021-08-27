@@ -18,7 +18,15 @@ It's built with [Laravel](https://laravel.com/docs/8.x/) and [Bulma CSS](https:/
 6. Run the database migrations: ``php artisan migrate``
 7. Compile the css files: ``npm run prod``
 8. Create a backend user: ``php artisan user:create username``
-9. Point your web root to the applications ``public`` directory
+9. Generate an application key: ``php artisan key:generate``
+10. Point your web root to the applications ``public`` directory
+11. Login into the DNS Panel and add your Domains under "Domains"
+12. Run an initial fetch of the records: ``php artisan dns-records:fetch``
+
+## Scheduled DNS Record fetch
+You can create a Cron-Job that fetches your DNS Records from ServerCow automatically.
+You just have to create a cronjob with the following content:  
+``* * * * * php /path/to/your/application/artisan schedule:run``
 
 ## Notes
 * This application currently supports english and german
